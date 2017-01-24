@@ -13,11 +13,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button selaaOluita = (Button) findViewById(R.id.selaaOluita);
+
         Button arvosteleOlut = (Button) findViewById(R.id.arvosteleOlut);
         Button profiili = (Button) findViewById(R.id.profiili);
 
-        selaaOluita.setOnClickListener(this);
+
         arvosteleOlut.setOnClickListener(this);
         profiili.setOnClickListener(this);
 
@@ -25,14 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public void onClick(View v){
 
-            final int selaa = R.id.selaaOluita;
+
             final int arvostele = R.id.arvosteleOlut;
             final int profiili = R.id.profiili;
             int id = v.getId();
-            if(id == selaa){
-                Intent intent = new Intent(getApplicationContext(), SelaaActivity.class);
-                startActivity(intent);
-            }else if(id == arvostele){
+          if(id == arvostele){
                 Intent intent = new Intent(getApplicationContext(), ArvosteleOlutActivity.class);
                 startActivity(intent);
             }else if(id == profiili){

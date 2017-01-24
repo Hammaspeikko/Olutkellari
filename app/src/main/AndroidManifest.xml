@@ -15,10 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SelaaActivity"
-            android:label="@string/title_activity_selaa"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SQLite" />
         <activity android:name=".ArvosteleOlutActivity" />
         <activity android:name=".ProfiiliActivity"></activity>
