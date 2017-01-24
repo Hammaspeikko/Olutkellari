@@ -24,5 +24,8 @@ public class SelaaActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        SQLite dbConnection = new SQLite();
+        dbConnection.haeKaikkiOluet();
     }
 }
