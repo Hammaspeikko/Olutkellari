@@ -36,7 +36,6 @@ public class SelaaOluita extends AppCompatActivity {
         OlutKortti olutKortti;
         List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
 
-
         Context ctx = this;
         DatabaseOperations dop = new DatabaseOperations(ctx);
         Cursor cursor = dop.haeKaikkiOluet(dop);
