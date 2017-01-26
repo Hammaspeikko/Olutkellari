@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.olutkellari">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SQLite" />
         <activity android:name=".ArvosteleOlutActivity" />
-        <activity android:name=".ProfiiliActivity"></activity>
+        <activity android:name=".ProfiiliActivity" />
+        <activity android:name=".SelaaOluita"></activity>
     </application>
 
 </manifest>
