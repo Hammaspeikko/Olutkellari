@@ -67,8 +67,8 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     public Cursor haeKaikkiOluet(DatabaseOperations dop){
         SQLiteDatabase SQdb = dop.getReadableDatabase();
         String[] kentat = {Olut.OlutInfo.Olut_ID, Olut.OlutInfo.nimi, Olut.OlutInfo.tyyppi,
-                Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta,
-                Olut.OlutInfo.hinta, Olut.OlutInfo.maa, Olut.OlutInfo.alkoholi};
+                Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta, Olut.OlutInfo.alkoholi
+                , Olut.OlutInfo.maa};
 
         Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, null,null,null,null,null );
         return cursor;
