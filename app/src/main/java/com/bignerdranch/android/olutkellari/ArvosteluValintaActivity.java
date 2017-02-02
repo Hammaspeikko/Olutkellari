@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 
 public class ArvosteluValintaActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,12 +30,40 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
         int ilman = R.id.ilmanViivakoodiaValinta;
         int id = v.getId();
         if(id == viiva){
-            Intent intent = new Intent(getApplicationContext(), ViivakoodiActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, SkannaaActivity.class);
+            startActivityForResult(intent,0);
         }else if (id == ilman){
             Intent intent = new Intent(getApplicationContext(), ArvosteleOlutActivity.class);
             startActivity(intent);
         }
 
+    }
+
+    public void skannaaKoodi(View v){
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode==0){
+
+            if(resultCode == CommonStatusCodes.SUCCESS){
+                if(data!=null){
+                    Barcode barcode = data.getParcelableExtra("barcode");
+                    Intent intent = new Intent(getApplicationContext(), ArvosteleOlutActivity.class);
+                    String barcodeValue = barcode.rawValue;
+                    boolean onkoInteger = barcodeValue.matches("\\d+");
+                    if(onkoInteger){
+                        intent.putExtra("barcodeValue",barcodeValue );
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(this,"Viivakoodin luku epäonnistui! Yritä uudelleen", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+        }else{
+            super.onActivityResult(requestCode,resultCode,data);
+        }
     }
 }

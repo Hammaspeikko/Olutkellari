@@ -22,7 +22,6 @@
         <activity android:name=".ArvosteleOlutActivity" />
         <activity android:name=".ProfiiliActivity" />
         <activity android:name=".SelaaOluita" />
-        <activity android:name=".ViivakoodiActivity" />
         <activity
             android:name=".SkannaaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
