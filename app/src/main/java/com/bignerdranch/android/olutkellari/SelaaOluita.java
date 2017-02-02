@@ -40,15 +40,10 @@ public class SelaaOluita extends AppCompatActivity {
         DatabaseOperations dop = new DatabaseOperations(ctx);
         Cursor cursor = dop.haeKaikkiOluet(dop);
         cursor.moveToFirst();
-
-        int size = cursor.getColumnCount();
-        int id;
-        String nimi, tyyppi, paikka, maa;
-        Double arvosana, hinta, alkoholi;
-
-
+        String id = null;
         do{
             olutKortti  = new OlutKortti();
+            id = cursor.getString(idInt);
             olutKortti.setNimi(cursor.getString(nimiInt));
             olutKortti.setHinta(cursor.getDouble(hintaInt));
             olutKortti.setMaa(cursor.getString(maaInt));

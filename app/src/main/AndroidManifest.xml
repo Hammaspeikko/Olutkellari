@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.olutkellari">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -19,7 +21,14 @@
         </activity>
         <activity android:name=".ArvosteleOlutActivity" />
         <activity android:name=".ProfiiliActivity" />
-        <activity android:name=".SelaaOluita"></activity>
+        <activity android:name=".SelaaOluita" />
+        <activity android:name=".ViivakoodiActivity" />
+        <activity
+            android:name=".SkannaaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_skannaa"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".ArvosteluValintaActivity"></activity>
     </application>
 
 </manifest>

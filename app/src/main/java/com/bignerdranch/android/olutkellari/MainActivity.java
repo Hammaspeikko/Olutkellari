@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button profiili = (Button) findViewById(R.id.profiili);
         Button selaaOluita = (Button) findViewById(R.id.selaaOluita);
 
+
         arvosteleOlut.setOnClickListener(this);
         profiili.setOnClickListener(this);
         selaaOluita.setOnClickListener(this);
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             final int selaa = R.id.selaaOluita;
             int id = v.getId();
           if(id == arvostele){
-                Intent intent = new Intent(getApplicationContext(), ArvosteleOlutActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ArvosteluValintaActivity.class);
                 startActivity(intent);
             }else if(id == profiili){
                 Intent intent = new Intent(getApplicationContext(), ProfiiliActivity.class);

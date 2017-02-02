@@ -12,6 +12,9 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.barcode.Barcode;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,11 +26,14 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
     EditText nimi, paikka,alkoholi,hinta;
     Spinner maatSpinner, tyyppiSpinner;
     RatingBar arvosana;
+    String olutId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arvostele_olut);
+
+        olutId = getIntent().getStringExtra("barcodeValue");
 
         //Tekstikentät
         nimi = (EditText) findViewById(R.id.nimiText);
@@ -99,24 +105,51 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
 
     public void onClick(View v){
         String nimiS, paikkaS, maaS, tyyppiS;
-        Double hintaD;
-        Double alkoholiD;
+        Double hintaD = null;
+        Double alkoholiD = null;
         Double arvosanaD;
         Context cxt = this;
 
+        boolean kaikkiTaytetty = true;
+
         nimiS = nimi.getText().toString();
+        if(nimiS.equals("") || nimiS == null){
+            kaikkiTaytetty = false;
+        }
         paikkaS = paikka.getText().toString();
+        if(paikkaS.equals("") || paikkaS == null){
+            kaikkiTaytetty = false;
+        }
         maaS = maatSpinner.getSelectedItem().toString();
         tyyppiS = tyyppiSpinner.getSelectedItem().toString();
-        hintaD = Double.parseDouble(hinta.getText().toString());
-        alkoholiD = Double.parseDouble(alkoholi.getText().toString());
+        String hintaString = hinta.getText().toString();
+
+        if(hintaString.equals("") || hintaString == null){
+            kaikkiTaytetty = false;
+        }else{
+            hintaD = Double.parseDouble(hintaString);
+        }
+        String alkoholiString = alkoholi.getText().toString();
+        if(alkoholiString.equals("") || alkoholiString == null){
+            kaikkiTaytetty = false;
+        }else{
+            alkoholiD = Double.parseDouble(alkoholiString);
+        }
         arvosanaD = Double.valueOf(arvosana.getRating());
+        if(arvosanaD.equals("") || arvosanaD == null){
+            kaikkiTaytetty = false;
+        }
 
-        DatabaseOperations dbo = new DatabaseOperations(cxt);
-        dbo.taytaKanta(dbo,null,nimiS,tyyppiS,arvosanaD,paikkaS,hintaD,maaS,alkoholiD);
+        if(kaikkiTaytetty){
+            DatabaseOperations dbo = new DatabaseOperations(cxt);
 
-        Toast.makeText(getBaseContext(),lisatty, Toast.LENGTH_LONG).show();
-        finish();
+            dbo.taytaKanta(dbo,olutId,nimiS,tyyppiS,arvosanaD,paikkaS,hintaD,maaS,alkoholiD);
+
+            Toast.makeText(getBaseContext(),lisatty, Toast.LENGTH_LONG).show();
+            finish();
+        }else{
+            Toast.makeText(getBaseContext(),"Täytä kaikki kentät!", Toast.LENGTH_LONG).show();
+        }
 
     }
 }

@@ -14,9 +14,11 @@ import android.util.Log;
 public class DatabaseOperations extends SQLiteOpenHelper {
     public static final int databaseVersion = 1;
     public String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS "+ Olut.OlutInfo.TABLE_NAME+ "("+ Olut.OlutInfo.Olut_ID +
-            " INTEGER,"+ Olut.OlutInfo.nimi+" TEXT,"+ Olut.OlutInfo.tyyppi +
+            " TEXT,"+ Olut.OlutInfo.nimi+" TEXT,"+ Olut.OlutInfo.tyyppi +
             " TEXT," + Olut.OlutInfo.arvosana + " INTEGER," + Olut.OlutInfo.paikka + " TEXT,"
             + Olut.OlutInfo.hinta + " NUMERIC," + Olut.OlutInfo.alkoholi +" NUMERIC," + Olut.OlutInfo.maa+" TEXT);";
+
+
 
     public DatabaseOperations(Context context) {
         super(context, Olut.OlutInfo.DATABASE_NAME, null, databaseVersion);
@@ -35,17 +37,13 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     }
 
-    public void taytaKanta(DatabaseOperations dop,Integer OlutId, String nimi, String tyyppi, Double arvosana, String paikka, Double hinta, String maa, Double alkoholi){
+    public void taytaKanta(DatabaseOperations dop,String OlutId, String nimi, String tyyppi, Double arvosana, String paikka, Double hinta, String maa, Double alkoholi){
 
         //Luodaan tarvittavat oliot
         SQLiteDatabase SQLdb = dop.getWritableDatabase();
         SQLdb.execSQL(CREATE_QUERY);
         Log.e("DatabaseOperations:", "Table luotu");
         ContentValues cv = new ContentValues();
-
-        if(OlutId == null){
-            OlutId = 0;
-        }
 
         //Asetetaan lähetettävät arvot
         cv.put(Olut.OlutInfo.Olut_ID, OlutId);
