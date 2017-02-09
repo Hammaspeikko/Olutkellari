@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by Sami on 24.1.2017.
@@ -22,14 +24,14 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     public DatabaseOperations(Context context) {
         super(context, Olut.OlutInfo.DATABASE_NAME, null, databaseVersion);
-        Log.e("DatabaseOperations:", "Database luotu");
+        Log.d("DatabaseOperations:", "Database luotu");
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_QUERY);
-        Log.e("DatabaseOperations:", "Table luotu");
+        Log.d("DatabaseOperations:", "Table luotu");
     }
 
     @Override
@@ -42,7 +44,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         //Luodaan tarvittavat oliot
         SQLiteDatabase SQLdb = dop.getWritableDatabase();
         SQLdb.execSQL(CREATE_QUERY);
-        Log.e("DatabaseOperations:", "Table luotu");
+        Log.d("DatabaseOperations:", "Table luotu");
         ContentValues cv = new ContentValues();
 
         //Asetetaan lähetettävät arvot
@@ -58,7 +60,8 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
         Long result = SQLdb.insert(Olut.OlutInfo.TABLE_NAME,null,cv);
         String resultString = result.toString();
-        Log.e("Insert: ", resultString);
+
+        Log.d("Insert: ", resultString);
 
     }
 
