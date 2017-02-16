@@ -22,8 +22,12 @@ public class SelaaOluita extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selaa_oluita);
+        kaisitteleTiedot();
 
-        final int idInt = 0;
+    }
+
+    public void kaisitteleTiedot(){
+
         final int nimiInt = 1;
         final int tyyppiInt = 2;
         final int arvosanaInt = 3;
@@ -38,29 +42,47 @@ public class SelaaOluita extends AppCompatActivity {
 
         Context ctx = this;
         DatabaseOperations dop = new DatabaseOperations(ctx);
-        Cursor cursor = dop.haeKaikkiOluet(dop);
-        cursor.moveToFirst();
-        String id = null;
-        do{
-            olutKortti  = new OlutKortti();
-            id = cursor.getString(idInt);
-            olutKortti.setNimi(cursor.getString(nimiInt));
-            olutKortti.setHinta(cursor.getDouble(hintaInt));
-            olutKortti.setMaa(cursor.getString(maaInt));
-            olutKortti.setAlkoholi(cursor.getDouble(alkoholiInt));
-            olutKortti.setArvosana(cursor.getDouble(arvosanaInt));
-            olutKortti.setPaikka(cursor.getString(paikkaInt));
-            olutKortti.setTyyppi(cursor.getString(tyyppiInt));
-            olutLista.add(olutKortti);
-        }while (cursor.moveToNext());
+        String olutId = getIntent().getStringExtra("barcodeValue");
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        if(olutId != null){
+            Cursor cursor = dop.haeViivakoodilpla(dop,olutId);
+            if(cursor.getCount() > 0){
+            cursor.moveToFirst();
+            do {
+                olutKortti = new OlutKortti();
+                olutKortti.setNimi(cursor.getString(nimiInt));
+                olutKortti.setHinta(cursor.getDouble(hintaInt));
+                olutKortti.setMaa(cursor.getString(maaInt));
+                olutKortti.setAlkoholi(cursor.getDouble(alkoholiInt));
+                olutKortti.setArvosana(cursor.getDouble(arvosanaInt));
+                olutKortti.setPaikka(cursor.getString(paikkaInt));
+                olutKortti.setTyyppi(cursor.getString(tyyppiInt));
+                olutLista.add(olutKortti);
+            } while (cursor.moveToNext());
+            }
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new OlutAdapter(olutLista);
+            mRecyclerView.setAdapter(mAdapter);
+        }else {
+            Cursor cursor = dop.haeKaikkiOluet(dop);
+            cursor.moveToFirst();
+            do {
+                olutKortti = new OlutKortti();
+                olutKortti.setNimi(cursor.getString(nimiInt));
+                olutKortti.setHinta(cursor.getDouble(hintaInt));
+                olutKortti.setMaa(cursor.getString(maaInt));
+                olutKortti.setAlkoholi(cursor.getDouble(alkoholiInt));
+                olutKortti.setArvosana(cursor.getDouble(arvosanaInt));
+                olutKortti.setPaikka(cursor.getString(paikkaInt));
+                olutKortti.setTyyppi(cursor.getString(tyyppiInt));
+                olutLista.add(olutKortti);
+            } while (cursor.moveToNext());
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new OlutAdapter(olutLista);
+            mRecyclerView.setAdapter(mAdapter);
+        }
 
-        // specify an adapter (see also next example)
-        mAdapter = new OlutAdapter(olutLista);
-        mRecyclerView.setAdapter(mAdapter);
-        
     }
 }

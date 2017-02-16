@@ -74,4 +74,17 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, null,null,null,null,null );
         return cursor;
     }
+
+    public Cursor haeViivakoodilpla(DatabaseOperations dop, String viivakoodi){
+        SQLiteDatabase SQdb = dop.getReadableDatabase();
+        String[] kentat = {Olut.OlutInfo.Olut_ID, Olut.OlutInfo.nimi, Olut.OlutInfo.tyyppi,
+                Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta, Olut.OlutInfo.alkoholi
+                , Olut.OlutInfo.maa};
+
+        String where = Olut.OlutInfo.Olut_ID + " =?";
+        String[] whereArgs = new String[]{viivakoodi};
+
+        Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, where,whereArgs,null,null,null );
+        return cursor;
+    }
 }

@@ -27,7 +27,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_skannaa"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".ArvosteluValintaActivity"></activity>
+        <activity android:name=".ArvosteluValintaActivity" />
+        <activity android:name=".HaeViivakoodillaActivity"></activity>
     </application>
 
 </manifest>
