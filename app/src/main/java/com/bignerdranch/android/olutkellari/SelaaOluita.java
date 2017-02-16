@@ -70,6 +70,7 @@ public class SelaaOluita extends AppCompatActivity {
         }else {
             Cursor cursor = dop.haeKaikkiOluet(dop);
             cursor.moveToFirst();
+            if(cursor.getCount() > 0){
             do {
                 olutKortti = new OlutKortti();
                 olutKortti.setNimi(cursor.getString(nimiInt));
@@ -81,6 +82,7 @@ public class SelaaOluita extends AppCompatActivity {
                 olutKortti.setTyyppi(cursor.getString(tyyppiInt));
                 olutLista.add(olutKortti);
             } while (cursor.moveToNext());
+            }
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mAdapter = new OlutAdapter(olutLista);

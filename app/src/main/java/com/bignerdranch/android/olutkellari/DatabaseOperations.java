@@ -67,6 +67,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     public Cursor haeKaikkiOluet(DatabaseOperations dop){
         SQLiteDatabase SQdb = dop.getReadableDatabase();
+        SQdb.execSQL(CREATE_QUERY);
         String[] kentat = {Olut.OlutInfo.Olut_ID, Olut.OlutInfo.nimi, Olut.OlutInfo.tyyppi,
                 Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta, Olut.OlutInfo.alkoholi
                 , Olut.OlutInfo.maa};
@@ -77,6 +78,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     public Cursor haeViivakoodilpla(DatabaseOperations dop, String viivakoodi){
         SQLiteDatabase SQdb = dop.getReadableDatabase();
+        SQdb.execSQL(CREATE_QUERY);
         String[] kentat = {Olut.OlutInfo.Olut_ID, Olut.OlutInfo.nimi, Olut.OlutInfo.tyyppi,
                 Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta, Olut.OlutInfo.alkoholi
                 , Olut.OlutInfo.maa};

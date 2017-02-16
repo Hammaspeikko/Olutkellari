@@ -64,7 +64,6 @@ public class ProfiiliActivity extends AppCompatActivity {
     }
 
     private void haeTiedot(){
-
         OlutKortti olutKortti;
         List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
 
@@ -82,14 +81,13 @@ public class ProfiiliActivity extends AppCompatActivity {
         Cursor cursor = dop.haeKaikkiOluet(dop);
         cursor.moveToFirst();
         Integer viivalla = 0;
-
+        if(cursor.getCount() > 0){
         do{
             olutKortti  = new OlutKortti();
             String olutID=cursor.getString(id);
             if(olutID != null){
                 viivalla = viivalla +1;
             }
-
             hinnatyhteensa=hinnatyhteensa.add(new BigDecimal((cursor.getDouble(hintaInt))));
             maat.add(cursor.getString(maaInt));
             Double arvosana = cursor.getDouble(arvosanaInt);
@@ -111,13 +109,11 @@ public class ProfiiliActivity extends AppCompatActivity {
                 top3Alkoholi.setText(cursor.getDouble(alkoholiInt)+ "%");
                 top3Arvo = arvosana;
             }
-
         }while (cursor.moveToNext());
-
         viivakoodilla = viivalla;
         kokonaismaara = olutLista.size();
-
         keskihintaDouble = hinnatyhteensa.divide(new BigDecimal(kokonaismaara),2, RoundingMode.HALF_UP);
+        }
     }
 
     private String haeSuosituin(ArrayList<String> lista){
