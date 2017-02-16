@@ -1,6 +1,9 @@
 package com.bignerdranch.android.olutkellari;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.accessibility.AccessibilityManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,8 +33,12 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
         int ilman = R.id.ilmanViivakoodiaValinta;
         int id = v.getId();
         if(id == viiva){
-            Intent intent = new Intent(this, SkannaaActivity.class);
-            startActivityForResult(intent,0);
+            if (ActivityCompat.checkSelfPermission(ArvosteluValintaActivity.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ArvosteluValintaActivity.this, new String[]{android.Manifest.permission.CAMERA}, 1);
+            }else{
+                Intent intent = new Intent(this, SkannaaActivity.class);
+                startActivityForResult(intent,0);
+            }
         }else if (id == ilman){
             Intent intent = new Intent(getApplicationContext(), ArvosteleOlutActivity.class);
             startActivity(intent);
@@ -64,6 +71,29 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
 
         }else{
             super.onActivityResult(requestCode,resultCode,data);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent(this, SkannaaActivity.class);
+                    startActivityForResult(intent,0);
+                } else {
+                    Intent intent = new Intent(this, ArvosteluValintaActivity.class);
+                    Toast.makeText(this,"Viivakoodinluku tarvitsee oikeudet kameraan!",Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
 }
