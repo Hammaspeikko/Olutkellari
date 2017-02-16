@@ -46,10 +46,6 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
 
     }
 
-    public void skannaaKoodi(View v){
-
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode==0){
 
