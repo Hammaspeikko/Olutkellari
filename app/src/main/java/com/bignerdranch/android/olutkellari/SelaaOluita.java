@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,8 @@ public class SelaaOluita extends AppCompatActivity {
                 olutKortti.setTyyppi(cursor.getString(tyyppiInt));
                 olutLista.add(olutKortti);
             } while (cursor.moveToNext());
+            }else{
+                Toast.makeText(getApplicationContext(), "Olutta ei löytynyt tietokannasta!",Toast.LENGTH_LONG).show();
             }
             mLayoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(mLayoutManager);
