@@ -110,11 +110,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     public boolean onkoHeaderi(int position){
-        if(position == 0){
-            return true;
-        }else{
-            return false;
-        }
+        return position == 0;
     }
 
     @Override
