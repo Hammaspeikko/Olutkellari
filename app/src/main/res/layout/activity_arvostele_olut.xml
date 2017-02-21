@@ -5,7 +5,8 @@
     android:id="@+id/activity_arvostele_olut"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bignerdranch.android.olutkellari.ArvosteleOlutActivity">
+    tools:context="com.bignerdranch.android.olutkellari.ArvosteleOlutActivity"
+    android:background="@android:color/white">
 
     <EditText
         android:layout_width="wrap_content"
@@ -31,7 +32,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:dropDownWidth="match_parent" />
+        android:dropDownWidth="215dp" />
 
     <Spinner
         android:layout_width="215dp"
@@ -43,7 +44,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:dropDownWidth="match_parent" />
+        android:dropDownWidth="215dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -100,7 +101,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias="0.44"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -117,7 +120,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.01"
+        />
 
 
 </android.support.constraint.ConstraintLayout>

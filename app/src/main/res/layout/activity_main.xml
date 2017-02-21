@@ -5,7 +5,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bignerdranch.android.olutkellari.MainActivity">
+    tools:context="com.bignerdranch.android.olutkellari.MainActivity"
+    android:background="@color/tausta">
 
     <Button
         android:text="Selaa omia oluita"
@@ -20,7 +21,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.060000002"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored"
+        />
 
     <Button
         android:text="Arvostele olut"
@@ -35,7 +39,9 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.04000002" />
+        app:layout_constraintVertical_bias="0.04000002"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
         android:text="Profiili"
@@ -50,6 +56,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.05"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
 </android.support.constraint.ConstraintLayout>

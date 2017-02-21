@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#ed4f46</color>
+    <color name="colorPrimaryDark">#ed4f46</color>
     <color name="colorAccent">#ff4081</color>
-    <color name="tahtiei">#fff600</color>
-    <color name="tahti">#c6c6b9</color>
-
+    <color name="tahtiei">#f7c04b</color>
+    <color name="tahti">#dfdfdf</color>
+    <color name="nappi">#f7c04b</color>
     <color name="black_overlay">#66000000</color>
+    <color name="tausta">#f3f3f3</color>
+
 </resources>

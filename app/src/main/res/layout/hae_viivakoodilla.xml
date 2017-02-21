@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/tausta">
 
     <Button
         android:text="Hae olut viivakoodilla"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/haeOlutViivakoodilla"
-        android:paddingBottom="10px" />
+        android:paddingBottom="10px"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 </LinearLayout>
