@@ -2,17 +2,23 @@ package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 
 public class ProfiiliActivity extends AppCompatActivity {
 
@@ -90,29 +96,18 @@ public class ProfiiliActivity extends AppCompatActivity {
             }
             hinnatyhteensa=hinnatyhteensa.add(new BigDecimal((cursor.getDouble(hintaInt))));
             maat.add(cursor.getString(maaInt));
-            Double arvosana = cursor.getDouble(arvosanaInt);
+            olutKortti.setArvosana(cursor.getDouble(arvosanaInt));
             tyypit.add(cursor.getString(tyyppiInt));
+            olutKortti.setHinta(cursor.getDouble(hintaInt));
+            olutKortti.setAlkoholi(cursor.getDouble(alkoholiInt));
+            olutKortti.setNimi(cursor.getString(nimiInt));
             olutLista.add(olutKortti);
-            if(arvosana > top1Arvo){
-                top1Hinta.setText("Hinta: "+cursor.getDouble(hintaInt));
-                top1Nimi.setText("Nimi: " + cursor.getString(nimiInt));
-                top1Alkoholi.setText(cursor.getDouble(alkoholiInt)+ "%");
-                top1Arvo = arvosana;
-            }else if(arvosana > top2Arvo){
-                top2Hinta.setText("Hinta: "+cursor.getDouble(hintaInt));
-                top2Nimi.setText("Nimi: " + cursor.getString(nimiInt));
-                top2Alkoholi.setText(cursor.getDouble(alkoholiInt)+ "%");
-                top2Arvo = arvosana;
-            }else if(arvosana > top3Arvo){
-                top3Hinta.setText("Hinta: "+cursor.getDouble(hintaInt));
-                top3Nimi.setText("Nimi: " + cursor.getString(nimiInt));
-                top3Alkoholi.setText(cursor.getDouble(alkoholiInt)+ "%");
-                top3Arvo = arvosana;
-            }
         }while (cursor.moveToNext());
-        viivakoodilla = viivalla;
-        kokonaismaara = olutLista.size();
-        keskihintaDouble = hinnatyhteensa.divide(new BigDecimal(kokonaismaara),2, RoundingMode.HALF_UP);
+
+            haeTop3(olutLista);
+            viivakoodilla = viivalla;
+            kokonaismaara = olutLista.size();
+            keskihintaDouble = hinnatyhteensa.divide(new BigDecimal(kokonaismaara),2, RoundingMode.HALF_UP);
         }
     }
 
@@ -139,5 +134,33 @@ public class ProfiiliActivity extends AppCompatActivity {
         }
         return isoinString;
     }
+
+    private void haeTop3(List<OlutKortti> lista){
+        Collections.sort(lista, new Comparator<OlutKortti>() {
+            @Override
+            public int compare(OlutKortti o1, OlutKortti o2) {
+                return o1.getArvosana().compareTo(o2.getArvosana());
+            }
+        });
+        Collections.reverse(lista);
+        int koko = lista.size();
+        if(koko >= 1){
+            top1Hinta.setText("Hinta: "+lista.get(0).getHinta());
+            top1Nimi.setText("Nimi: " + lista.get(0).getNimi());
+            top1Alkoholi.setText(lista.get(0).getAlkoholi()+ "%");
+        }
+        if(koko >= 2){
+            top2Hinta.setText("Hinta: "+lista.get(1).getHinta());
+            top2Nimi.setText("Nimi: " + lista.get(1).getNimi());
+            top2Alkoholi.setText(lista.get(1).getAlkoholi()+ "%");
+        }
+        if(koko >= 3){
+            top3Hinta.setText("Hinta: "+lista.get(2).getHinta());
+            top3Nimi.setText("Nimi: " + lista.get(2).getNimi());
+            top3Alkoholi.setText(lista.get(2).getAlkoholi()+ "%");
+        }
+
+    }
+
 
 }

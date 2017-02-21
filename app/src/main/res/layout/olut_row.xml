@@ -79,6 +79,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:paddingBottom="15px"
+        android:theme="@style/RatingBar"
         app:layout_constraintHorizontal_bias="0.66" />
 
     <TextView
