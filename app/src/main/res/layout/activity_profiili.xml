@@ -23,7 +23,8 @@
         android:textColor="@android:color/white"
         android:textAlignment="center"
         android:paddingTop="5dp"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:textAllCaps="true" />
 
     <TextView
         android:text="Nimi"
