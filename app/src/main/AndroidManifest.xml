@@ -28,7 +28,7 @@
             android:label="Aseta viivakoodi keskelle ruutua"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".ArvosteluValintaActivity" />
-        <activity android:name=".HaeViivakoodillaActivity"></activity>
+        <activity android:name=".HaeViivakoodillaActivity" />
     </application>
 
 </manifest>
