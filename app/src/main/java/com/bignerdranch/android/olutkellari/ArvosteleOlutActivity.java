@@ -1,7 +1,7 @@
 package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.vision.barcode.Barcode;
-
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,7 +72,6 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
                 maat.add(maa);
             }
         }
-
         // Maat aakkosjärjestykse
         Collections.sort(maat);
         return maat;
