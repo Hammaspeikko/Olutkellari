@@ -52,7 +52,7 @@
         android:layout_width="236dp" />
 
     <TextView
-        android:text="Lisää olut tietokantaan ilman viivakoodia. Tämän jälkeen et pysty hakea olutta viivakoodilla."
+        android:text="Lisää olut tietokantaan ilman viivakoodia. Tämän jälkeen et pysty hakemaan olutta viivakoodilla."
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
         android:layout_width="236dp"
