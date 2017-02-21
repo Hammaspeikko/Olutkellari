@@ -1,12 +1,18 @@
 package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -17,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ProfiiliActivity extends AppCompatActivity {
+public class ProfiiliActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView top1Nimi, top1Hinta, top1Alkoholi,top2Nimi, top2Hinta, top2Alkoholi,top3Nimi,
             top3Hinta, top3Alkoholi, tyyppi, keskihinta, kokonaishinta, maa,viivakoodi;
@@ -29,6 +35,7 @@ public class ProfiiliActivity extends AppCompatActivity {
     Integer viivakoodilla = 0;
     BigDecimal keskihintaDouble = new BigDecimal("0");
     Switch topSwitch;
+    Button tyhjennaKanta;
 
     OlutKortti olutKortti;
     List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
@@ -57,6 +64,7 @@ public class ProfiiliActivity extends AppCompatActivity {
         maa = (TextView) findViewById(R.id.lempiMaa);
         viivakoodi = (TextView) findViewById(R.id.viivakoodilla);
         topSwitch = (Switch) findViewById(R.id.toplistaSwitch);
+        tyhjennaKanta = (Button) findViewById(R.id.poistaKaikki);
 
         haeTiedot();
         topSwitch.setChecked(true);
@@ -75,6 +83,7 @@ public class ProfiiliActivity extends AppCompatActivity {
             }
         });
 
+        tyhjennaKanta.setOnClickListener(this);
         tyyppi.setText("Suosituin oluttyyppi: "+haeSuosituin(tyypit));
         maa.setText("Suosituin maa: "+haeSuosituin(maat));
         kokonaishinta.setText("Kokonaishinta: " +hinnatyhteensa.toString());
@@ -175,4 +184,35 @@ public class ProfiiliActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle("Poista kaikki oluet kannasta")
+                .setMessage("Oletko varrma, että haluat poistaa kaikki oluet kannasta?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        toinenVarmistus();
+                    }})
+                .setNegativeButton("Ei", null).show();
+    }
+
+    private void toinenVarmistus(){
+        new AlertDialog.Builder(this)
+                .setTitle("Poista kaikki oluet kannasta")
+                .setMessage("Tätä toimintoa ei voi peruuttaa. Haluatko yhä jatkaa?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        poistaKaikkiOluet();
+                    }}).setNegativeButton("Ei", null).show();
+    }
+
+    private void poistaKaikkiOluet(){
+        Context ctx = this;
+        DatabaseOperations dop = new DatabaseOperations(ctx);
+        dop.dropTable(dop);
+        Toast.makeText(this, "Kaikki oluet on nyt poistettu!",Toast.LENGTH_LONG ).show();
+    }
 }

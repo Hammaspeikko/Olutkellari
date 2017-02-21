@@ -18,7 +18,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
             " TEXT,"+ Olut.OlutInfo.nimi+" TEXT,"+ Olut.OlutInfo.tyyppi +
             " TEXT," + Olut.OlutInfo.arvosana + " INTEGER," + Olut.OlutInfo.paikka + " TEXT,"
             + Olut.OlutInfo.hinta + " NUMERIC," + Olut.OlutInfo.alkoholi +" NUMERIC," + Olut.OlutInfo.maa+" TEXT);";
-
+    public String DROP_TABLE ="DROP TABLE IF EXISTS " +Olut.OlutInfo.TABLE_NAME +";";
 
 
     public DatabaseOperations(Context context) {
@@ -87,5 +87,10 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
         Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, where,whereArgs,null,null,null );
         return cursor;
+    }
+
+    public void dropTable(DatabaseOperations dop){
+        SQLiteDatabase SQdb = dop.getReadableDatabase();
+        SQdb.execSQL(DROP_TABLE);
     }
 }
