@@ -2,20 +2,19 @@ package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +30,11 @@ public class ProfiiliActivity extends AppCompatActivity {
     Integer kokonaismaara = 0;
     Integer viivakoodilla = 0;
     BigDecimal keskihintaDouble = new BigDecimal("0");
+    Switch topSwitch;
 
-    Double top1Arvo = 0.0;
-    Double top2Arvo = 0.0;
-    Double top3Arvo = 0.0;
+    OlutKortti olutKortti;
+    List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +58,24 @@ public class ProfiiliActivity extends AppCompatActivity {
         kokonaishinta = (TextView) findViewById(R.id.kulutettuRaha);
         maa = (TextView) findViewById(R.id.lempiMaa);
         viivakoodi = (TextView) findViewById(R.id.viivakoodilla);
+        topSwitch = (Switch) findViewById(R.id.toplistaSwitch);
 
         haeTiedot();
+        topSwitch.setChecked(true);
+        topSwitch.setText("Top 3");
+        topSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    topSwitch.setText("Top 3");
+                    haeTop3(olutLista,false);
+                }else{
+                    topSwitch.setText("Bottom 3");
+                    haeTop3(olutLista,true);
+                }
+
+            }
+        });
 
         tyyppi.setText("Suosituin oluttyyppi: "+haeSuosituin(tyypit));
         maa.setText("Suosituin maa: "+haeSuosituin(maat));
@@ -70,14 +86,10 @@ public class ProfiiliActivity extends AppCompatActivity {
     }
 
     private void haeTiedot(){
-        OlutKortti olutKortti;
-        List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
-
-        final int id = 0;
+               final int id = 0;
         final int nimiInt = 1;
         final int tyyppiInt = 2;
         final int arvosanaInt = 3;
-        final int paikkaInt = 4;
         final int hintaInt = 5;
         final int alkoholiInt = 6;
         final int maaInt = 7;
@@ -104,7 +116,7 @@ public class ProfiiliActivity extends AppCompatActivity {
             olutLista.add(olutKortti);
         }while (cursor.moveToNext());
 
-            haeTop3(olutLista);
+            haeTop3(olutLista,false);
             viivakoodilla = viivalla;
             kokonaismaara = olutLista.size();
             keskihintaDouble = hinnatyhteensa.divide(new BigDecimal(kokonaismaara),2, RoundingMode.HALF_UP);
@@ -135,14 +147,16 @@ public class ProfiiliActivity extends AppCompatActivity {
         return isoinString;
     }
 
-    private void haeTop3(List<OlutKortti> lista){
+    private void haeTop3(List<OlutKortti> lista, Boolean valittu){
         Collections.sort(lista, new Comparator<OlutKortti>() {
             @Override
             public int compare(OlutKortti o1, OlutKortti o2) {
                 return o1.getArvosana().compareTo(o2.getArvosana());
             }
         });
-        Collections.reverse(lista);
+        if(!valittu){
+            Collections.reverse(lista);
+        }
         int koko = lista.size();
         if(koko >= 1){
             top1Hinta.setText("Hinta: "+lista.get(0).getHinta());
