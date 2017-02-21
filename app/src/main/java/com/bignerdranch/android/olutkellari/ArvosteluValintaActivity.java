@@ -81,9 +81,7 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
                     Intent intent = new Intent(this, SkannaaActivity.class);
                     startActivityForResult(intent,0);
                 } else {
-                    Intent intent = new Intent(this, ArvosteluValintaActivity.class);
                     Toast.makeText(this,"Viivakoodinluku tarvitsee oikeudet kameraan!",Toast.LENGTH_LONG).show();
-                    startActivity(intent);
                 }
                 return;
             }
