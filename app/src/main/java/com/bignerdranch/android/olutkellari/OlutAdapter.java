@@ -22,20 +22,41 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private static final int item = 1;
     private List<OlutKortti> olutList;
     private Context context;
+    private int paikka;
+
 
 
 
     @Override
     public void onClick(View v) {
-        Intent intent =  new Intent(context, HaeViivakoodillaActivity.class);
-        context.startActivity(intent);
+        int hae = R.id.haeOlutViivakoodilla;
+        int poista = R.id.poista;
+        int id = v.getId();
+        if(id == hae){
+            Intent intent =  new Intent(context, HaeViivakoodillaActivity.class);
+            context.startActivity(intent);
+        }else if (id == poista){
+            OlutKortti olut = olutList.get(paikka-1);
+            Context ctx = context;
+            DatabaseOperations dop = new DatabaseOperations(ctx);
+            dop.deleteOlut(dop, olut);
+            olutList.remove(paikka-1);
+            swap(olutList);
 
+        }
+
+
+    }
+
+    public void swap(List<OlutKortti> datas){
+        notifyDataSetChanged();
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nimi, hinta, tyyppi, alkoholi, maa, paikka;
         public RatingBar rate;
+        private Button poista;
 
         public MyViewHolder(View view) {
             super(view);
@@ -47,6 +68,8 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             paikka = (TextView) view.findViewById(R.id.paikka);
             rate = (RatingBar) view.findViewById(R.id.ratingBar);
             rate.setStepSize((float)0.5);
+            poista = (Button) view.findViewById(R.id.poista);
+
         }
     }
 
@@ -84,6 +107,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
         if(holder instanceof MyViewHolder){
             OlutKortti olut = olutList.get(position-1);
+            paikka = position;
             ((MyViewHolder) holder).nimi.setText(olut.getNimi());
             ((MyViewHolder) holder).hinta.setText(olut.getHinta().toString() + " €");
             ((MyViewHolder) holder).tyyppi.setText(olut.getTyyppi());
@@ -92,6 +116,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             ((MyViewHolder) holder).maa.setText(olut.getMaa());
             double arvosana = olut.getArvosana();
             ((MyViewHolder) holder).rate.setRating((float) arvosana);
+            ((MyViewHolder) holder).poista.setOnClickListener(this);
         }else if(holder instanceof MyHeaderHolder){
             ((MyHeaderHolder) holder).viivakoodiHaku.setOnClickListener(this);
         }

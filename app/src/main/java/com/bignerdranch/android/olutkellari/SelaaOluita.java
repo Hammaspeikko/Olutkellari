@@ -1,6 +1,7 @@
 package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,4 +90,5 @@ public class SelaaOluita extends AppCompatActivity {
         }
 
     }
+
 }

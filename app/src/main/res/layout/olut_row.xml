@@ -25,8 +25,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/Hinta"
@@ -47,13 +47,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Tyyppi"
-        app:layout_constraintTop_toBottomOf="@+id/Nimi"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/alkoholi" />
 
     <TextView
         android:text="alkoholi"
@@ -61,13 +61,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/alkoholi"
         android:textAlignment="textEnd"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/Nimi"
+        app:layout_constraintTop_toBottomOf="@+id/Nimi"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:paddingBottom="15px"
         android:theme="@style/RatingBar"
-        app:layout_constraintHorizontal_bias="0.66" />
+        android:layout_marginTop="24dp" />
 
     <TextView
         android:text="Maa"
@@ -109,6 +109,20 @@
         app:layout_constraintTop_toBottomOf="@+id/maa"
         app:layout_constraintHorizontal_bias="0.0"
         android:layout_marginTop="8dp" />
+
+    <Button
+        android:text="Poista olut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/poista"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/Nimi"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        style="@style/Widget.AppCompat.Button.Colored" />
 
 
 </android.support.constraint.ConstraintLayout>

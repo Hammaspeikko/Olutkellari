@@ -93,4 +93,11 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         SQLiteDatabase SQdb = dop.getReadableDatabase();
         SQdb.execSQL(DROP_TABLE);
     }
+
+    public void deleteOlut(DatabaseOperations dop, OlutKortti kortti){
+        SQLiteDatabase SQdb = dop.getReadableDatabase();
+        String[] test = {kortti.getNimi()};
+        SQdb.delete(Olut.OlutInfo.TABLE_NAME,Olut.OlutInfo.nimi + " = ?",test);
+
+    }
 }
