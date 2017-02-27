@@ -41,6 +41,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             DatabaseOperations dop = new DatabaseOperations(ctx);
             dop.deleteOlut(dop, olut);
             olutList.remove(paikka-1);
+            Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
             swap(olutList);
 
         }
