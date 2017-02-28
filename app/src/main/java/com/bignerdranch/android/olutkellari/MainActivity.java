@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         builder = new AlertDialog.Builder(this);
         builder.setMessage("1. Tietojen kerääminen\n\n" +
-                "Emme kerää sovelluksella mitään tietoja omaan käyttöön, eikä sovellus lähetä mitään tietoja ulkopuolisille. Sovellus kerää kamera kuvasta viivakoodin ID numeron, mitä sovellus käyttää olen tallentamisessa ja hakemiseen tietokannasta.\n\n" +
+                "Emme kerää sovelluksella mitään tietoja omaan käyttöön, eikä sovellus lähetä mitään tietoja ulkopuolisille. Sovellus kerää kamera kuvasta viivakoodin ID numeron, mitä sovellus käyttää oluen tallentamisessa ja hakemiseen tietokannasta.\n\n" +
                 "2. Tietojen käyttäminen\n\n" +
-                "Sovellus käyttää puhelimesi kameraa tunnistaakseen oluen viivakoodin. Kameran kuvaamaa kuvaa ei tallenneta mihinkään. Kameran ottamasta viivakoodista etsitään viivakoodin ID, joka tallennetaan puhelimen omaan muistiin. Tätä tietoa ei lähetetä mihinkään puhelimen ulkopuolelle\n\n" +
+                "Sovellus käyttää puhelimen kameraa tunnistaakseen oluen viivakoodin. Kameran kuvaamaa kuvaa ei tallenneta mihinkään. Kameran ottamasta viivakoodista etsitään viivakoodin ID, joka tallennetaan puhelimen omaan muistiin. Tätä tietoa ei lähetetä mihinkään puhelimen ulkopuolelle\n\n" +
                 "3. Tietojen poistaminen\n\n" +
                 "Jos haluat poistaa kaikki sovelluksen tallentamat tiedot puhelimestasi mene profiilit sivulle ja paina tyhjennä kanta. Tämän jälkeen voit poistaa sovelluksen.\n\n" +
                 "4. Suostumus\n\n" +
