@@ -200,7 +200,7 @@ public class ProfiiliActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         new AlertDialog.Builder(this)
                 .setTitle("Poista kaikki oluet kannasta")
-                .setMessage("Oletko varrma, että haluat poistaa kaikki oluet kannasta?")
+                .setMessage("Oletko varma, että haluat poistaa kaikki oluet kannasta?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
 

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnClickListener{
     private final String lisatty = "Olut lisätty!";
@@ -60,6 +64,9 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
         Button tallennaButton = (Button) findViewById(R.id.tallenna);
         tallennaButton.setOnClickListener(this);
 
+        hinta.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,2)});
+        alkoholi.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(3,2)});
+
 
 
     }
@@ -103,7 +110,7 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
         Context cxt = this;
 
         boolean kaikkiTaytetty = true;
-
+        boolean numerovaarin = false;
         nimiS = nimi.getText().toString();
         if(nimiS.equals("") || nimiS == null){
             kaikkiTaytetty = false;
@@ -116,31 +123,65 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
         tyyppiS = tyyppiSpinner.getSelectedItem().toString();
         String hintaString = hinta.getText().toString();
 
-        if(hintaString.equals("") || hintaString == null){
+        if(hintaString.equals("")  || hintaString == null){
             kaikkiTaytetty = false;
         }else{
-            hintaD = Double.parseDouble(hintaString);
+            if(hintaString.equals(".")){
+                numerovaarin = true;
+            }else{
+                hintaD = Double.parseDouble(hintaString);
+            }
         }
         String alkoholiString = alkoholi.getText().toString();
-        if(alkoholiString.equals("") || alkoholiString == null){
+        if(alkoholiString.equals("") || alkoholiString.equals(",") || alkoholiString == null){
             kaikkiTaytetty = false;
         }else{
-            alkoholiD = Double.parseDouble(alkoholiString);
+            if(alkoholiString.equals(".")){
+                numerovaarin = true;
+            }else{
+                alkoholiD = Double.parseDouble(alkoholiString);
+            }
+
         }
         arvosanaD = Double.valueOf(arvosana.getRating());
         if(arvosanaD.equals("") || arvosanaD == null){
             kaikkiTaytetty = false;
         }
 
-        if(kaikkiTaytetty){
-            DatabaseOperations dbo = new DatabaseOperations(cxt);
+      if(kaikkiTaytetty){
+          if(numerovaarin){
+              Toast.makeText(getBaseContext(),"Täytä numerot oikein!", Toast.LENGTH_LONG).show();
 
-            dbo.taytaKanta(dbo,olutId,nimiS,tyyppiS,arvosanaD,paikkaS,hintaD,maaS,alkoholiD);
+          }else{
+              DatabaseOperations dbo = new DatabaseOperations(cxt);
 
-            Toast.makeText(getBaseContext(),lisatty, Toast.LENGTH_LONG).show();
-            finish();
+              dbo.taytaKanta(dbo,olutId,nimiS,tyyppiS,arvosanaD,paikkaS,hintaD,maaS,alkoholiD);
+
+              Toast.makeText(getBaseContext(),lisatty, Toast.LENGTH_LONG).show();
+              finish();
+          }
+
         }else{
             Toast.makeText(getBaseContext(),"Täytä kaikki kentät!", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private class DecimalDigitsInputFilter implements InputFilter {
+
+        Pattern mPattern;
+
+        public DecimalDigitsInputFilter(int digitsBeforeZero,int digitsAfterZero) {
+            mPattern=Pattern.compile("[0-9]{0," + (digitsBeforeZero-1) + "}+((\\.[0-9]{0," + (digitsAfterZero-1) + "})?)||(\\.)?");
+        }
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            Matcher matcher=mPattern.matcher(dest);
+            if(!matcher.matches())
+                return "";
+            return null;
         }
 
     }

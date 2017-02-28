@@ -40,7 +40,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
         }else if (id == poista){
             new AlertDialog.Builder(context)
                     .setTitle("Poista olut kannasta")
-                    .setMessage("Oletko varrma, että haluat poistaaa oluen kannasta? Toimintoa ei voi peruuttaa!")
+                    .setMessage("Oletko varma, että haluat poistaa oluen kannasta? Toimintoa ei voi peruuttaa!")
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {

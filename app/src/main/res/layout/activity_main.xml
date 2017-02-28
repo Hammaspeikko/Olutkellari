@@ -61,7 +61,7 @@
         style="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
-        android:text="TIETOSUOJAKÄYTÖNNÖT"
+        android:text="TIETOSUOJAKÄYTÄNNÖT"
         android:layout_height="50dp"
         android:id="@+id/tietosuoja"
         android:layout_marginTop="208dp"

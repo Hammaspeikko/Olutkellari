@@ -9,7 +9,7 @@
     android:background="@color/tausta">
 
     <Button
-        android:text="Lisää olut kättäen viivakoodia"
+        android:text="Lisää olut käyttäen viivakoodia"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:id="@+id/viivakoodiValinta"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:text="lisää oluit ilman viivakoodia"
+        android:text="lisää olut ilman viivakoodia"
         android:layout_height="wrap_content"
         android:id="@+id/ilmanViivakoodiaValinta"
         android:layout_marginEnd="16dp"
