@@ -11,10 +11,6 @@
     <SurfaceView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/kameraPrev"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        android:id="@+id/kameraPrev"/>
 
 </FrameLayout>

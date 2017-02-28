@@ -17,12 +17,16 @@ import java.util.List;
 import java.util.Locale;
 
 public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnClickListener{
-    final String lisatty = "Olut lisätty!";
+    private final String lisatty = "Olut lisätty!";
 
-    EditText nimi, paikka,alkoholi,hinta;
-    Spinner maatSpinner, tyyppiSpinner;
-    RatingBar arvosana;
-    String olutId;
+    private EditText nimi;
+    private EditText paikka;
+    private EditText alkoholi;
+    private EditText hinta;
+    private Spinner maatSpinner;
+    private Spinner tyyppiSpinner;
+    private RatingBar arvosana;
+    private String olutId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,12 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
         //Spinnerit
         maatSpinner = (Spinner) findViewById(R.id.maa);
         List<String> maat = haeMaat();
-        ArrayAdapter<String> adapterMaat = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, maat);
+        ArrayAdapter<String> adapterMaat = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, maat);
         maatSpinner.setAdapter(adapterMaat);
 
         tyyppiSpinner = (Spinner) findViewById(R.id.tyyppi);
         List<String> tyypit = haeOlutTyypit();
-        ArrayAdapter<String> adapterTyypit = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, tyypit);
+        ArrayAdapter<String> adapterTyypit = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tyypit);
         tyyppiSpinner.setAdapter(adapterTyypit);
 
         Button tallennaButton = (Button) findViewById(R.id.tallenna);
@@ -63,7 +67,7 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
     private List<String> haeMaat (){
         //Hakee kaikki maat
         Locale[] locales = Locale.getAvailableLocales();
-        ArrayList<String> maat = new ArrayList<String>();
+        ArrayList<String> maat = new ArrayList<>();
 
         //Lisätään kaikki maat listaan (poislukien tyhjät ja tuplat)
         for(Locale l : locales){
@@ -78,7 +82,7 @@ public class ArvosteleOlutActivity extends AppCompatActivity implements View.OnC
     }
 
     private List<String> haeOlutTyypit(){
-        List<String> tyypit = new ArrayList<String>();
+        List<String> tyypit = new ArrayList<>();
         tyypit.add("Vehnäolut"); tyypit.add("Berliner Weisse"); tyypit.add("Lambic"); tyypit.add("Stout");
         tyypit.add("Portteri"); tyypit.add("Ale"); tyypit.add("Bitter"); tyypit.add("Trappist");
         tyypit.add("Alt"); tyypit.add("Kölsch");  tyypit.add("Sahti");

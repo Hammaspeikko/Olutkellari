@@ -247,7 +247,7 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:background="@color/nappi"
         android:padding="5dp"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textAllCaps="false"
         android:textStyle="normal|bold" />
 

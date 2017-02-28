@@ -23,7 +23,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 public class SkannaaActivity extends AppCompatActivity {
-    SurfaceView kameraPrev;
+    private SurfaceView kameraPrev;
 
 
 
@@ -105,7 +105,6 @@ public class SkannaaActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-                return;
             }
 
             // other 'case' lines to check for other

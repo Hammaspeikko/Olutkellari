@@ -12,13 +12,13 @@ import android.util.Log;
  * Created by Sami on 24.1.2017.
  */
 
-public class DatabaseOperations extends SQLiteOpenHelper {
-    public static final int databaseVersion = 1;
-    public String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS "+ Olut.OlutInfo.TABLE_NAME+ "("+ Olut.OlutInfo.Olut_ID +
+class DatabaseOperations extends SQLiteOpenHelper {
+    private static final int databaseVersion = 1;
+    private final String CREATE_QUERY = "CREATE TABLE IF NOT EXISTS "+ Olut.OlutInfo.TABLE_NAME+ "("+ Olut.OlutInfo.Olut_ID +
             " TEXT,"+ Olut.OlutInfo.nimi+" TEXT,"+ Olut.OlutInfo.tyyppi +
             " TEXT," + Olut.OlutInfo.arvosana + " INTEGER," + Olut.OlutInfo.paikka + " TEXT,"
             + Olut.OlutInfo.hinta + " NUMERIC," + Olut.OlutInfo.alkoholi +" NUMERIC," + Olut.OlutInfo.maa+" TEXT);";
-    public String DROP_TABLE ="DROP TABLE IF EXISTS " +Olut.OlutInfo.TABLE_NAME +";";
+    private final String DROP_TABLE ="DROP TABLE IF EXISTS " +Olut.OlutInfo.TABLE_NAME +";";
 
 
     public DatabaseOperations(Context context) {
@@ -71,8 +71,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
                 Olut.OlutInfo.arvosana, Olut.OlutInfo.paikka, Olut.OlutInfo.hinta, Olut.OlutInfo.alkoholi
                 , Olut.OlutInfo.maa};
 
-        Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, null,null,null,null,null );
-        return cursor;
+        return SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, null,null,null,null,null );
     }
 
     public Cursor haeViivakoodilpla(DatabaseOperations dop, String viivakoodi){
@@ -85,8 +84,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         String where = Olut.OlutInfo.Olut_ID + " =?";
         String[] whereArgs = new String[]{viivakoodi};
 
-        Cursor cursor = SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, where,whereArgs,null,null,null );
-        return cursor;
+        return SQdb.query(Olut.OlutInfo.TABLE_NAME, kentat, where,whereArgs,null,null,null );
     }
 
     public void dropTable(DatabaseOperations dop){

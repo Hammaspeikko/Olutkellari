@@ -4,7 +4,7 @@ package com.bignerdranch.android.olutkellari;
  * Created by Sami on 26.1.2017.
  */
 
-public class OlutKortti {
+class OlutKortti {
 
     private String nimi;
     private String tyyppi;

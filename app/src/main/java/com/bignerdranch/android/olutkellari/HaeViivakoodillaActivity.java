@@ -64,7 +64,6 @@ public class HaeViivakoodillaActivity extends AppCompatActivity {
                     startActivity(intent);
                     Toast.makeText(this,"Viivakoodinluku tarvitsee oikeudet kameraan!",Toast.LENGTH_LONG).show();
                 }
-                return;
             }
 
             // other 'case' lines to check for other

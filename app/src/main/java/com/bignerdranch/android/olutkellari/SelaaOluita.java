@@ -1,7 +1,6 @@
 package com.bignerdranch.android.olutkellari;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +13,6 @@ import java.util.List;
 
 public class SelaaOluita extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -27,7 +22,7 @@ public class SelaaOluita extends AppCompatActivity {
 
     }
 
-    public void kaisitteleTiedot(){
+    private void kaisitteleTiedot(){
 
         final int nimiInt = 1;
         final int tyyppiInt = 2;
@@ -37,14 +32,16 @@ public class SelaaOluita extends AppCompatActivity {
         final int alkoholiInt = 6;
         final int maaInt = 7;
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         OlutKortti olutKortti;
-        List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
+        List<OlutKortti> olutLista = new ArrayList<>();
 
         Context ctx = this;
         DatabaseOperations dop = new DatabaseOperations(ctx);
         String olutId = getIntent().getStringExtra("barcodeValue");
 
+        RecyclerView.Adapter mAdapter;
+        RecyclerView.LayoutManager mLayoutManager;
         if(olutId != null){
             Cursor cursor = dop.haeViivakoodilpla(dop,olutId);
             if(cursor.getCount() > 0){

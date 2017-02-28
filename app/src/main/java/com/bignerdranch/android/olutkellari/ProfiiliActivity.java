@@ -25,20 +25,32 @@ import java.util.Map;
 
 public class ProfiiliActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView top1Nimi, top1Hinta, top1Alkoholi,top2Nimi, top2Hinta, top2Alkoholi,top3Nimi,
-            top3Hinta, top3Alkoholi, tyyppi, keskihinta, kokonaishinta, maa,viivakoodi;
+    private TextView top1Nimi;
+    private TextView top1Hinta;
+    private TextView top1Alkoholi;
+    private TextView top2Nimi;
+    private TextView top2Hinta;
+    private TextView top2Alkoholi;
+    private TextView top3Nimi;
+    private TextView top3Hinta;
+    private TextView top3Alkoholi;
+    private TextView tyyppi;
+    private TextView keskihinta;
+    private TextView kokonaishinta;
+    private TextView maa;
+    private TextView viivakoodi;
 
-    ArrayList<String> maat = new ArrayList<>();
-    ArrayList<String> tyypit = new ArrayList<>();
-    BigDecimal hinnatyhteensa = new BigDecimal("0");
-    Integer kokonaismaara = 0;
-    Integer viivakoodilla = 0;
-    BigDecimal keskihintaDouble = new BigDecimal("0");
-    Switch topSwitch;
-    Button tyhjennaKanta;
+    private final ArrayList<String> maat = new ArrayList<>();
+    private final ArrayList<String> tyypit = new ArrayList<>();
+    private BigDecimal hinnatyhteensa = new BigDecimal("0");
+    private Integer kokonaismaara = 0;
+    private Integer viivakoodilla = 0;
+    private BigDecimal keskihintaDouble = new BigDecimal("0");
+    private Switch topSwitch;
+    private Button tyhjennaKanta;
 
-    OlutKortti olutKortti;
-    List<OlutKortti> olutLista = new ArrayList<OlutKortti>();
+    private OlutKortti olutKortti;
+    private final List<OlutKortti> olutLista = new ArrayList<>();
 
 
     @Override
@@ -132,7 +144,7 @@ public class ProfiiliActivity extends AppCompatActivity implements View.OnClickL
 
     private String haeSuosituin(ArrayList<String> lista){
 
-        HashMap<String,Integer> map = new HashMap<String, Integer>();
+        HashMap<String,Integer> map = new HashMap<>();
         String valiaikainenString;
         String isoinString = "Ei lisättyjä oluita";
         Integer isoin = 0;

@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by Sami on 24.1.2017.
  */
 
-public class Olut {
+class Olut {
 
     public Olut() {
     }

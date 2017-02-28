@@ -19,10 +19,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private static final int header = 0;
     private static final int item = 1;
-    private List<OlutKortti> olutList;
+    private final List<OlutKortti> olutList;
     private Context context;
     private int paikka;
 
@@ -50,7 +50,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                             dop.deleteOlut(dop, olut);
                             olutList.remove(paikka-1);
                             Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
-                            swap(olutList);                        }})
+                            swap();                        }})
                     .setNegativeButton("Ei", null).show();
 
         }
@@ -58,15 +58,20 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     }
 
-    public void swap(List<OlutKortti> datas){
+    private void swap(){
         notifyDataSetChanged();
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView nimi, hinta, tyyppi, alkoholi, maa, paikka;
-        public RatingBar rate;
-        private Button poista;
+        public final TextView nimi;
+        public final TextView hinta;
+        public final TextView tyyppi;
+        public final TextView alkoholi;
+        public final TextView maa;
+        public final TextView paikka;
+        public final RatingBar rate;
+        private final Button poista;
 
         public MyViewHolder(View view) {
             super(view);
@@ -85,7 +90,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     public class MyHeaderHolder extends RecyclerView.ViewHolder {
 
-        public Button viivakoodiHaku;
+        public final Button viivakoodiHaku;
 
         public MyHeaderHolder(View view) {
             super(view);
@@ -144,7 +149,7 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
     }
 
-    public boolean onkoHeaderi(int position){
+    private boolean onkoHeaderi(int position){
         return position == 0;
     }
 

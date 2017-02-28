@@ -82,7 +82,7 @@ public class ArvosteluValintaActivity extends AppCompatActivity implements View.
                 } else {
                     Toast.makeText(this,"Viivakoodinluku tarvitsee oikeudet kameraan!",Toast.LENGTH_LONG).show();
                 }
-                return;
+
             }
 
             // other 'case' lines to check for other

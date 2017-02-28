@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/Nimi"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_width="207dp"
         android:layout_height="20dp"
@@ -79,7 +79,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingBottom="15px"
+        android:paddingBottom="15dp"
         android:theme="@style/RatingBar"
         android:layout_marginTop="24dp" />
 
