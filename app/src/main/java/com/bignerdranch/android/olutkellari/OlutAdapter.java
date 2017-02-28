@@ -5,7 +5,9 @@ package com.bignerdranch.android.olutkellari;
  */
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,13 +38,20 @@ public class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             Intent intent =  new Intent(context, HaeViivakoodillaActivity.class);
             context.startActivity(intent);
         }else if (id == poista){
-            OlutKortti olut = olutList.get(paikka-1);
-            Context ctx = context;
-            DatabaseOperations dop = new DatabaseOperations(ctx);
-            dop.deleteOlut(dop, olut);
-            olutList.remove(paikka-1);
-            Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
-            swap(olutList);
+            new AlertDialog.Builder(context)
+                    .setTitle("Poista olut kannasta")
+                    .setMessage("Oletko varrma, että haluat poistaaa oluen kannasta? Toimintoa ei voi peruuttaa!")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            OlutKortti olut = olutList.get(paikka-1);
+                            Context ctx = context;
+                            DatabaseOperations dop = new DatabaseOperations(ctx);
+                            dop.deleteOlut(dop, olut);
+                            olutList.remove(paikka-1);
+                            Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
+                            swap(olutList);                        }})
+                    .setNegativeButton("Ei", null).show();
 
         }
 
