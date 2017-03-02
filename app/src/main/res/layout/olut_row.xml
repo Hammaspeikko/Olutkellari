@@ -8,7 +8,7 @@
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical"
-    >
+    android:id="@+id/olut_row_kortti">
 
     <TextView
         android:id="@+id/Nimi"
@@ -109,20 +109,6 @@
         app:layout_constraintTop_toBottomOf="@+id/maa"
         app:layout_constraintHorizontal_bias="0.0"
         android:layout_marginTop="8dp" />
-
-    <Button
-        android:text="Poista olut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/poista"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/Nimi"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        style="@style/Widget.AppCompat.Button.Colored" />
 
 
 </android.support.constraint.ConstraintLayout>

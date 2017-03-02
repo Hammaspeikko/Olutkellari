@@ -7,6 +7,7 @@ package com.bignerdranch.android.olutkellari;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
+class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener,View.OnLongClickListener {
     private static final int header = 0;
     private static final int item = 1;
     private final List<OlutKortti> olutList;
@@ -32,34 +33,34 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
     @Override
     public void onClick(View v) {
         int hae = R.id.haeOlutViivakoodilla;
-        int poista = R.id.poista;
         int id = v.getId();
         if(id == hae){
             Intent intent =  new Intent(context, HaeViivakoodillaActivity.class);
             context.startActivity(intent);
-        }else if (id == poista){
-            new AlertDialog.Builder(context)
-                    .setTitle("Poista olut kannasta")
-                    .setMessage("Oletko varma, että haluat poistaa oluen kannasta? Toimintoa ei voi peruuttaa!")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            OlutKortti olut = olutList.get(paikka-1);
-                            Context ctx = context;
-                            DatabaseOperations dop = new DatabaseOperations(ctx);
-                            dop.deleteOlut(dop, olut);
-                            olutList.remove(paikka-1);
-                            Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
-                            swap();                        }})
-                    .setNegativeButton("Ei", null).show();
-
         }
-
-
     }
 
     private void swap(){
         notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        new AlertDialog.Builder(context)
+                .setTitle("Poista olut kannasta")
+                .setMessage("Oletko varma, että haluat poistaa oluen kannasta? Toimintoa ei voi peruuttaa!")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        OlutKortti olut = olutList.get(paikka-1);
+                        Context ctx = context;
+                        DatabaseOperations dop = new DatabaseOperations(ctx);
+                        dop.deleteOlut(dop, olut);
+                        olutList.remove(paikka-1);
+                        Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
+                        swap();                        }})
+                .setNegativeButton("Ei", null).show();
+        return false;
     }
 
 
@@ -71,7 +72,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
         public final TextView maa;
         public final TextView paikka;
         public final RatingBar rate;
-        private final Button poista;
+        private ConstraintLayout kortti = null;
 
         public MyViewHolder(View view) {
             super(view);
@@ -83,7 +84,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
             paikka = (TextView) view.findViewById(R.id.paikka);
             rate = (RatingBar) view.findViewById(R.id.ratingBar);
             rate.setStepSize((float)0.5);
-            poista = (Button) view.findViewById(R.id.poista);
+            kortti = (ConstraintLayout) view.findViewById(R.id.olut_row_kortti);
 
         }
     }
@@ -131,7 +132,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
             ((MyViewHolder) holder).maa.setText(olut.getMaa());
             double arvosana = olut.getArvosana();
             ((MyViewHolder) holder).rate.setRating((float) arvosana);
-            ((MyViewHolder) holder).poista.setOnClickListener(this);
+            ((MyViewHolder) holder).kortti.setOnLongClickListener(this);
         }else if(holder instanceof MyHeaderHolder){
             ((MyHeaderHolder) holder).viivakoodiHaku.setOnClickListener(this);
         }
