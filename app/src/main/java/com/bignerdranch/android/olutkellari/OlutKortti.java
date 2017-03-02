@@ -1,10 +1,12 @@
 package com.bignerdranch.android.olutkellari;
 
+import java.io.Serializable;
+
 /**
  * Created by Sami on 26.1.2017.
  */
 
-class OlutKortti {
+class OlutKortti implements Serializable {
 
     private String nimi;
     private String tyyppi;

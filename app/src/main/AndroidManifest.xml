@@ -28,6 +28,7 @@
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".ArvosteluValintaActivity" />
         <activity android:name=".HaeViivakoodillaActivity" />
+        <activity android:name=".PaivitaOlutActivity"></activity>
     </application>
 
 </manifest>

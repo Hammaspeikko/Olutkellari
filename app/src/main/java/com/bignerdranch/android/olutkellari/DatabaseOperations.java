@@ -94,8 +94,25 @@ class DatabaseOperations extends SQLiteOpenHelper {
 
     public void deleteOlut(DatabaseOperations dop, OlutKortti kortti){
         SQLiteDatabase SQdb = dop.getReadableDatabase();
-        String[] test = {kortti.getNimi()};
-        SQdb.delete(Olut.OlutInfo.TABLE_NAME,Olut.OlutInfo.nimi + " = ?",test);
+        String[] nimi = {kortti.getNimi()};
+        SQdb.delete(Olut.OlutInfo.TABLE_NAME,Olut.OlutInfo.nimi + " = ?",nimi);
 
+    }
+
+    public void updateOlut(DatabaseOperations dop, OlutKortti kortti){
+        SQLiteDatabase SQdb = dop.getReadableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(Olut.OlutInfo.nimi,kortti.getNimi());
+        cv.put(Olut.OlutInfo.tyyppi, kortti.getTyyppi());
+        cv.put(Olut.OlutInfo.arvosana,kortti.getArvosana());
+        cv.put(Olut.OlutInfo.paikka, kortti.getPaikka());
+        cv.put(Olut.OlutInfo.hinta, kortti.getHinta());
+        cv.put(Olut.OlutInfo.maa, kortti.getMaa());
+        cv.put(Olut.OlutInfo.alkoholi,kortti.getAlkoholi());
+        String[] nimi = {kortti.getNimi()};
+
+        SQdb.update(Olut.OlutInfo.TABLE_NAME,cv,Olut.OlutInfo.nimi + " = ?",nimi);
     }
 }

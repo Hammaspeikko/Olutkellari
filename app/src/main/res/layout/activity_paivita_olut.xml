@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_paivita_olut"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bignerdranch.android.olutkellari.PaivitaOlutActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:ems="10"
+        android:id="@+id/nimiTextPaivita"
+        android:hint="Nimi:"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <Spinner
+        android:layout_width="215dp"
+        android:layout_height="45dp"
+        android:id="@+id/tyyppiPaivita"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/nimiTextPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:dropDownWidth="215dp" />
+
+    <Spinner
+        android:layout_width="215dp"
+        android:layout_height="45dp"
+        android:id="@+id/maaPaivita"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/hintaPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:dropDownWidth="215dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:ems="10"
+        android:id="@+id/paikkaTextPaivita"
+        app:layout_constraintTop_toBottomOf="@+id/tyyppiPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:hint="Juontipaikka:" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/hintaPaivita"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/paikkaTextPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:hint="Hinta:" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/arvosteluPaivita"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/alkoholiPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:theme="@style/RatingBar"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:text="Paivita"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/paivita"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/arvosteluPaivita"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.44"
+        android:background="@color/nappi"
+        style="@style/Widget.AppCompat.Button.Colored" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/alkoholiPaivita"
+        android:hint="Alkoholipituoisuus (%)"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/maaPaivita"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+</android.support.constraint.ConstraintLayout>

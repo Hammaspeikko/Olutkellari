@@ -7,6 +7,7 @@ package com.bignerdranch.android.olutkellari;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 
 class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener,View.OnLongClickListener {
@@ -26,6 +28,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
     private final List<OlutKortti> olutList;
     private Context context;
     private int paikka;
+    private AlertDialog.Builder builder;
 
 
 
@@ -46,20 +49,36 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
 
     @Override
     public boolean onLongClick(View v) {
-        new AlertDialog.Builder(context)
-                .setTitle("Poista olut kannasta")
-                .setMessage("Oletko varma, että haluat poistaa oluen kannasta? Toimintoa ei voi peruuttaa!")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
+
+        builder = new AlertDialog.Builder(context);
+        builder.setMessage("Haluatko poistaa vai muokata olutta?")
+                .setCancelable(true)
+                .setPositiveButton("Muokka olutta", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         OlutKortti olut = olutList.get(paikka-1);
-                        Context ctx = context;
-                        DatabaseOperations dop = new DatabaseOperations(ctx);
-                        dop.deleteOlut(dop, olut);
-                        olutList.remove(paikka-1);
-                        Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
-                        swap();                        }})
-                .setNegativeButton("Ei", null).show();
+                        Intent intent = new Intent(context, PaivitaOlutActivity.class);
+                        intent.putExtra("Kortti", olut);
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Poista olut",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        new AlertDialog.Builder(context)
+                                .setTitle("Poista olut kannasta")
+                                .setMessage("Oletko varma, että haluat poistaa oluen kannasta? Toimintoa ei voi peruuttaa!")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton("Kyllä", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        OlutKortti olut = olutList.get(paikka-1);
+                                        Context ctx = context;
+                                        DatabaseOperations dop = new DatabaseOperations(ctx);
+                                        dop.deleteOlut(dop, olut);
+                                        olutList.remove(paikka-1);
+                                        Toast.makeText(context,"Olut poistettu!",Toast.LENGTH_LONG).show();
+                                        swap();                        }})
+                                .setNegativeButton("Ei", null).show();
+                    }
+                }).show();
         return false;
     }
 
