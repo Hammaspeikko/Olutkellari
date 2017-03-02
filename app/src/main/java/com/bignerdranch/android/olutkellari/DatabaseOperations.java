@@ -99,7 +99,7 @@ class DatabaseOperations extends SQLiteOpenHelper {
 
     }
 
-    public void updateOlut(DatabaseOperations dop, OlutKortti kortti){
+    public void updateOlut(DatabaseOperations dop, OlutKortti kortti, String orginalName){
         SQLiteDatabase SQdb = dop.getReadableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -111,7 +111,7 @@ class DatabaseOperations extends SQLiteOpenHelper {
         cv.put(Olut.OlutInfo.hinta, kortti.getHinta());
         cv.put(Olut.OlutInfo.maa, kortti.getMaa());
         cv.put(Olut.OlutInfo.alkoholi,kortti.getAlkoholi());
-        String[] nimi = {kortti.getNimi()};
+        String[] nimi = {orginalName};
 
         SQdb.update(Olut.OlutInfo.TABLE_NAME,cv,Olut.OlutInfo.nimi + " = ?",nimi);
     }

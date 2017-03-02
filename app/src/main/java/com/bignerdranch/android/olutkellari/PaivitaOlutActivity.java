@@ -32,7 +32,7 @@ public class PaivitaOlutActivity extends AppCompatActivity implements View.OnCli
     private Spinner maatSpinner;
     private Spinner tyyppiSpinner;
     private RatingBar arvosana;
-    private String olutId;
+    private String orginalName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class PaivitaOlutActivity extends AppCompatActivity implements View.OnCli
         //Tekstikentät
         nimi = (EditText) findViewById(R.id.nimiTextPaivita);
         nimi.setText(kortti.getNimi());
+        orginalName = kortti.getNimi();
 
         paikka = (EditText) findViewById(R.id.paikkaTextPaivita);
         paikka.setText(kortti.getPaikka());
@@ -213,7 +214,7 @@ public class PaivitaOlutActivity extends AppCompatActivity implements View.OnCli
 
                 DatabaseOperations dbo = new DatabaseOperations(cxt);
 
-                dbo.updateOlut(dbo,olutkortti);
+                dbo.updateOlut(dbo,olutkortti,orginalName);
 
                 Toast.makeText(getBaseContext(),lisatty, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, MainActivity.class);
