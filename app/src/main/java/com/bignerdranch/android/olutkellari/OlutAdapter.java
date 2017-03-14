@@ -122,7 +122,7 @@ class OlutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implemen
                     builder = new AlertDialog.Builder(context);
                     builder.setMessage("Haluatko poistaa vai muokata olutta?")
                             .setCancelable(true)
-                            .setPositiveButton("Muokka olutta", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Muokkaa olutta", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     OlutKortti olut = olutList.get(position-1);
                                     Intent intent = new Intent(context, PaivitaOlutActivity.class);

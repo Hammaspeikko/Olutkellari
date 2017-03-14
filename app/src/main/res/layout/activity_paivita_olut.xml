@@ -89,7 +89,7 @@
         app:layout_constraintVertical_bias="0.13" />
 
     <Button
-        android:text="Paivita"
+        android:text="Päivitä"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:id="@+id/paivita"
@@ -111,7 +111,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/alkoholiPaivita"
-        android:hint="Alkoholipituoisuus (%)"
+        android:hint="Alkoholipitoisuus (%)"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/maaPaivita"
         android:layout_marginEnd="16dp"
